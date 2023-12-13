@@ -14,6 +14,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send('THIS IS FROM BACKEND');
 });
 
-app.all("*",api);
+// app.all("*",api);
 
 app.use(errorMiddleware);

@@ -13,7 +13,7 @@ export const getAllDigitalProducts = async () => {
 export const getDigitalProductById = async (productId: number) => {
   try {
     const digitalProduct = await prisma.digitalProduct.findUnique({
-      where: { id: productId },
+      where: { product_id: productId },
     });
 
     if (!digitalProduct) {
@@ -40,8 +40,9 @@ export const createDigitalProduct = async (digitalProductData: digitalProductSch
 
 export const updateDigitalProduct = async (productId: number, updatedDigitalProductData: digitalProductSchemaType) => {
   try {
+
     const updatedDigitalProduct = await prisma.digitalProduct.update({
-      where: { id: productId },
+      where: { product_id: productId },
       data: updatedDigitalProductData,
     });
 
@@ -54,7 +55,7 @@ export const updateDigitalProduct = async (productId: number, updatedDigitalProd
 export const deleteDigitalProduct = async (productId: number) => {
   try {
     const deletedDigitalProduct = await prisma.digitalProduct.delete({
-      where: { id: productId },
+      where: { product_id: productId },
     });
 
     return deletedDigitalProduct;

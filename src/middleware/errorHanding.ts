@@ -10,7 +10,12 @@ export const errorMiddleware = (error: any, req: Request, res: Response, next: N
   let errorMessage = "Internal server error";
 
   if (error instanceof ZodError) {
-    const errorMessages = error.errors.map((err) => `Error in field '${err.path.join('.')}': ${err.message}`);
+    const errorMessages = error.errors.map((error) => {
+      const fieldName = error.path.join('.');
+      const errorMessage = error.message;
+      return `Error in field '${fieldName}': ${errorMessage}`;
+  });
+
     res.status(400).json({ success: false, message: errorMessages });
   } else {
     const validationResult = errorSchema.safeParse(error);

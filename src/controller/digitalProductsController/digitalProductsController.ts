@@ -16,8 +16,8 @@ export const getAllDigitalProducts = async (req: Request, res: Response, next: N
 
 export const getDigitalProductById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { productId } = getDigitalProductByIdSchema.parse(req.params.query)
-    const digitalProduct = await digitalProductService.getDigitalProductById(productId);
+    const { productId } = getDigitalProductByIdSchema.parse(req.params)
+    const digitalProduct = await digitalProductService.getDigitalProductById(Number(productId));
 
     res.status(200).json({ success: true, message: "Digital product retrieved successfully", data: digitalProduct });
 
@@ -43,7 +43,7 @@ export const createDigitalProduct = async (req: Request, res: Response, next: Ne
 export const updateDigitalProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { productId, updatedDigitalProductData } = updateDigitalProductSchema.parse(req.body)
-    const updatedDigitalProduct = await digitalProductService.updateDigitalProduct(productId, updatedDigitalProductData);
+    const updatedDigitalProduct = await digitalProductService.updateDigitalProduct(Number(productId), updatedDigitalProductData);
 
     res.status(200).json({ success: true, message: "Digital product updated successfully", data: updatedDigitalProduct });
 
@@ -55,10 +55,11 @@ export const updateDigitalProduct = async (req: Request, res: Response, next: Ne
 
 export const deleteDigitalProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { productId } = deleteDigitalProductSchema.parse(req.body);
-    await digitalProductService.deleteDigitalProduct(productId);
+    const { productId } = deleteDigitalProductSchema.parse(req.params);
 
-    res.status(200).json({ success: false, message: "Digital product deleted successfully" });
+    await digitalProductService.deleteDigitalProduct(Number(productId));
+
+    res.status(200).json({ success: true, message: "Digital product deleted successfully" });
 
   } catch (error: any) {
     error.customMessage = "Error deleting digital product";
