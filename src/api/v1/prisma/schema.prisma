@@ -1,0 +1,42 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./src/api/v1/prisma/client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model DigitalProduct {
+  product_id          Int      @id @unique @default(autoincrement()) 
+  user_id             Int      @default(autoincrement())
+  product_img_link    String
+  heading             String
+  subheading          String
+  description         String
+  pricing             Int
+  product_domain      String   @map("product_domain")
+  file_url            String   @map("file_url")
+  button_title        String   @map("button_title")
+  email               Boolean?
+  name                Boolean?
+  mobile              Boolean?
+  pageViews           Int      @default(0)
+  salesConverted      Int      @default(0)
+  pageViewUpdatedAt   DateTime @updatedAt
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model CustomerInformation {
+  id        Int      @id @default(autoincrement())
+  product_id Int
+  name      String?  
+  mobile    String?  
+  email     String? 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
