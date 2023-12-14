@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node dist/src/server.js",
+    "start": "node dist/server.js",
     "dev": "npx prisma generate && ts-node src/server.ts --watch",
     "build": "tsc",
     "prisma:push": "prisma db push",
