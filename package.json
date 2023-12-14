@@ -10,8 +10,15 @@
     "prisma:push": "prisma db push",
     "prisma:pull": "prisma db pull",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": "prisma generate --schema=schema",
     "prisma:studio": "prisma studio"
+  },
+  "prisma": {
+    "schema": "./src/api/v1/prisma/schema.prisma",
+    "generator": {
+      "output": "./generated/prisma-client",
+      "name": "client"
+    }
   },
   "author": "",
   "license": "ISC",
